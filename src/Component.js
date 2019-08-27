@@ -84,7 +84,6 @@ function Component() {
 
   const _sendMessage = text => {
     if (text.length > 0) {
-      debugger;
       addUserMessage(text);
     }
   };
