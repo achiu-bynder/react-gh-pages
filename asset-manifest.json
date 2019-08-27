@@ -1,16 +1,20 @@
 {
   "files": {
     "main.css": "/react-gh-pages/static/css/main.2cce8147.chunk.css",
-    "main.js": "/react-gh-pages/static/js/main.46578d4a.chunk.js",
-    "main.js.map": "/react-gh-pages/static/js/main.46578d4a.chunk.js.map",
-    "runtime~main.js": "/react-gh-pages/static/js/runtime~main.f2d17e16.js",
-    "runtime~main.js.map": "/react-gh-pages/static/js/runtime~main.f2d17e16.js.map",
-    "static/js/2.fcfad392.chunk.js": "/react-gh-pages/static/js/2.fcfad392.chunk.js",
-    "static/js/2.fcfad392.chunk.js.map": "/react-gh-pages/static/js/2.fcfad392.chunk.js.map",
+    "main.js": "/react-gh-pages/static/js/main.cd1970fe.chunk.js",
+    "main.js.map": "/react-gh-pages/static/js/main.cd1970fe.chunk.js.map",
+    "runtime~main.js": "/react-gh-pages/static/js/runtime~main.63cd1d55.js",
+    "runtime~main.js.map": "/react-gh-pages/static/js/runtime~main.63cd1d55.js.map",
+    "static/css/2.243e406b.chunk.css": "/react-gh-pages/static/css/2.243e406b.chunk.css",
+    "static/js/2.dd4e5e9f.chunk.js": "/react-gh-pages/static/js/2.dd4e5e9f.chunk.js",
+    "static/js/2.dd4e5e9f.chunk.js.map": "/react-gh-pages/static/js/2.dd4e5e9f.chunk.js.map",
     "index.html": "/react-gh-pages/index.html",
-    "precache-manifest.e3fd8ab5f5e4dbc09f6c930116dd0ff2.js": "/react-gh-pages/precache-manifest.e3fd8ab5f5e4dbc09f6c930116dd0ff2.js",
+    "precache-manifest.1e34d5faaba65609abd4245cd5f1d42d.js": "/react-gh-pages/precache-manifest.1e34d5faaba65609abd4245cd5f1d42d.js",
     "service-worker.js": "/react-gh-pages/service-worker.js",
+    "static/css/2.243e406b.chunk.css.map": "/react-gh-pages/static/css/2.243e406b.chunk.css.map",
     "static/css/main.2cce8147.chunk.css.map": "/react-gh-pages/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/react-gh-pages/static/media/logo.5d5d9eef.svg"
+    "static/media/chat-icon.svg": "/react-gh-pages/static/media/chat-icon.e0d2b748.svg",
+    "static/media/logo-no-bg.svg": "/react-gh-pages/static/media/logo-no-bg.7718b3e3.svg",
+    "static/media/notification.mp3": "/react-gh-pages/static/media/notification.0d062b33.mp3"
   }
 }
