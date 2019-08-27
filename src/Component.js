@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { Launcher } from "react-chat-window";
 import { Input, Button } from "semantic-ui-react";
+import {
+  Widget,
+  addResponseMessage,
+  addLinkSnippet,
+  addUserMessage,
+  toggleWidget
+} from "react-chat-widget";
+import "react-chat-widget/lib/styles.css";
 const Peer = window.Peer;
 const p5 = window.p5;
 function Component() {
@@ -14,10 +22,11 @@ function Component() {
   const [messageList, setMessageList] = useState([]);
   const [myRec, setMyRec] = useState(null);
   console.log("list", messageList);
-
+  let widgetEl = useRef();
+  let launcherEl = useRef();
+  let inputEl = useRef();
   useEffect(() => {
     var peer = new Peer({ key: "lwjd5qra8257b9" });
-    setPeer(peer);
 
     peer.on("open", function(id) {
       console.log("My peer ID is: " + id);
@@ -26,18 +35,9 @@ function Component() {
 
     peer.on("connection", function(conn) {
       setConn(conn);
-      conn.on("open", function() {
-        // Receive messages
-        console.log("connected", conn);
-        setConnected(true);
-        conn.on("data", function(data) {
-          console.log("Received", data);
-        });
-
-        // Send messages
-        conn.send("Hello!");
-      });
     });
+    setPeer(peer);
+    toggleWidget();
   }, []);
 
   useEffect(() => {
@@ -50,69 +50,50 @@ function Component() {
       // recognition system will often append words into phrases.
       // so hack here is to only use the last word:
       var mostrecentword = myRec.resultString.split(" ").pop();
-      if (mostrecentword.indexOf("left") !== -1) {
-        /*
-    dx = -1;
-    dy = 0;
-    */
-      } else if (mostrecentword.indexOf("right") !== -1) {
-        /*
-    dx = 1;
-    dy = 0;
-    */
-      } else if (mostrecentword.indexOf("up") !== -1) {
-        /*
-    dx = 0;
-    dy = -1;
-    */
-      } else if (mostrecentword.indexOf("down") !== -1) {
-        /*
-    dx = 0;
-    dy = 1;
-    */
-      } else if (mostrecentword.indexOf("clear") !== -1) {
-        /*
-    background(255);
-    */
-      }
+      conn.send(myRec.resultString);
       _sendMessage(myRec.resultString);
-      if (conn) {
-        conn.send(myRec.resultString);
-      }
     }
-  }, [messageList]);
+  }, [conn]);
 
   useEffect(() => {
-    console.log("friendPeer", friendPeer);
+    if (conn) {
+      conn.on("open", function() {
+        // Receive messages
+        console.log("connected", conn);
+        setConnected(true);
+        //setConnected(true);
+        conn.on("data", function(data) {
+          console.log("Received", data);
+          addResponseMessage(data);
+        });
+      });
+    }
+  }, [conn]);
+
+  useEffect(() => {
     if (peer) {
       var conn = peer.connect(friendPeer);
       setConnected(true);
       setConn(conn);
-
-      console.log("connection", conn);
     }
-  }, [friendPeer, peer]);
+  }, [friendPeer]);
 
   const _onMessageWasSent = message => {
     conn.send(message);
-    setMessageList([...messageList, message]);
   };
 
   const _sendMessage = text => {
     if (text.length > 0) {
-      setMessageList([
-        ...messageList,
-        {
-          author: "them",
-          type: "text",
-          data: { text }
-        }
-      ]);
+      debugger;
+      addUserMessage(text);
     }
+  };
+  const handleNewUserMessage = newMessage => {
+    conn.send(newMessage);
   };
 
   return (
-    <div className="App">
+    <div ref={inputEl} className="App">
       <header className="App-header">
         {friendPeerId}
         {connected && (
@@ -143,18 +124,7 @@ function Component() {
           />
         )}
         {peerId}
-
-        <Launcher
-          isOpen={true}
-          agentProfile={{
-            teamName: "react-chat-window",
-            imageUrl:
-              "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png"
-          }}
-          onMessageWasSent={_onMessageWasSent.bind(this)}
-          messageList={messageList}
-          showEmoji
-        />
+        <Widget handleNewUserMessage={handleNewUserMessage} />
       </header>
     </div>
   );
