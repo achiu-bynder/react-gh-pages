@@ -133,10 +133,10 @@ function Component() {
               <Button
                 onClick={() => {
                   setFriendPeer(friendPeerId);
-                  _sendMessage("fuck");
+                  _sendMessage("send");
                 }}
               >
-                fuck
+                send
               </Button>
             }
             placeholder="Connect to peer"
